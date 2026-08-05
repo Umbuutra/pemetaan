@@ -89,7 +89,7 @@ class PemetaanController extends Controller
                 'nim' => $m->nim,
                 'nama' => $m->nama_lengkap,
                 'prodi' => $m->programStudi?->nama_prodi,
-                'fakultas' => $m->programStudi?->fakultas?->nama_fakultas,
+                'fakultas' => $m->programStudi?->fakultas?->nama_fakultas ?? 'Lainnya',
                 'angkatan' => $m->angkatan,
                 'status_kuliah' => ucfirst($m->status_kuliah),
                 'kelurahan' => $kelurahan?->nama_kelurahan,
@@ -102,6 +102,7 @@ class PemetaanController extends Controller
                 'perusahaan' => $profesi?->perusahaan?->nama_perusahaan ?? '-',
                 'jenis_pekerjaan' => $profesi?->jenis_pekerjaan ? ucfirst(str_replace('_', ' ', $profesi->jenis_pekerjaan)) : 'Belum Bekerja',
                 'keselarasan_prodi' => $profesi?->keselarasan_prodi ?? 'belum_ditentukan',
+                'pendapatan_raw' => (float) ($profesi?->pendapatan_bulanan ?? 0),
                 'pendapatan_bulanan' => $profesi?->pendapatan_bulanan ? 'Rp ' . number_format($profesi->pendapatan_bulanan, 0, ',', '.') : '-',
                 'lat' => (float) $lat,
                 'lng' => (float) $lng,
@@ -120,7 +121,7 @@ class PemetaanController extends Controller
             ->sortDesc()
             ->take(10);
 
-        // 2. Chart Statistik Jenis Pekerjaan
+        // 2. Chart Statistik Jenis Pekerjaan (Full time, Part time, Freelance, Wirausaha, Internship, Belum Bekerja)
         $jenisPekerjaanDist = $locations->groupBy('jenis_pekerjaan')
             ->map(fn ($group) => $group->count());
 
@@ -135,6 +136,29 @@ class PemetaanController extends Controller
             'Tidak Selaras' => $locations->where('keselarasan_prodi', 'tidak_selaras')->count(),
         ];
 
+        // 4. Distribusi Rentang Pendapatan Bulanan Alumni
+        $gajiDist = [
+            '< Rp 5 Juta' => $locations->where('pendapatan_raw', '>', 0)->where('pendapatan_raw', '<', 5000000)->count(),
+            'Rp 5 - 10 Juta' => $locations->where('pendapatan_raw', '>=', 5000000)->where('pendapatan_raw', '<=', 10000000)->count(),
+            'Rp 10 - 15 Juta' => $locations->where('pendapatan_raw', '>', 10000000)->where('pendapatan_raw', '<=', 15000000)->count(),
+            '> Rp 15 Juta' => $locations->where('pendapatan_raw', '>', 15000000)->count(),
+        ];
+
+        // 5. Breakdown Keselarasan Karir per Fakultas (Stacked Bar)
+        $fakultasNames = $locations->pluck('fakultas')->unique()->values();
+        $fakultasKeselarasanSeries = [
+            'selaras' => [],
+            'kurang_selaras' => [],
+            'tidak_selaras' => [],
+        ];
+
+        foreach ($fakultasNames as $fakName) {
+            $group = $locations->where('fakultas', $fakName);
+            $fakultasKeselarasanSeries['selaras'][] = $group->where('keselarasan_prodi', 'selaras')->count();
+            $fakultasKeselarasanSeries['kurang_selaras'][] = $group->where('keselarasan_prodi', 'kurang_selaras')->count();
+            $fakultasKeselarasanSeries['tidak_selaras'][] = $group->where('keselarasan_prodi', 'tidak_selaras')->count();
+        }
+
         return response()->json([
             'locations' => $locations,
             'stats' => [
@@ -147,6 +171,11 @@ class PemetaanController extends Controller
             'profesi_distribution' => $profesiDist,
             'jenis_pekerjaan_distribution' => $jenisPekerjaanDist,
             'keselarasan_breakdown' => $keselarasanBreakdown,
+            'gaji_distribution' => $gajiDist,
+            'fakultas_keselarasan' => [
+                'categories' => $fakultasNames,
+                'series' => $fakultasKeselarasanSeries,
+            ]
         ]);
     }
 }

@@ -50,7 +50,7 @@
 
     <style>
         #map {
-            height: 500px;
+            height: 480px;
             width: 100%;
             border-radius: 1rem;
             z-index: 10;
@@ -86,7 +86,7 @@
                     <h1 class="text-xl font-bold tracking-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
                         Pusim Map System
                     </h1>
-                    <p class="text-xs text-slate-400">Pemetaan Sebaran Mahasiswa & Alumni Berdasarkan Profesi (GIS)</p>
+                    <p class="text-xs text-slate-400">Pemetaan Sebaran Mahasiswa & Dashboard Tracer Study (ApexCharts)</p>
                 </div>
             </div>
 
@@ -94,7 +94,7 @@
             <div class="flex items-center gap-2.5">
                 <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
                     <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                    Live GIS Connected
+                    Live Analytics Connected
                 </span>
                 <a href="http://localhost:8080" target="_blank" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition-colors flex items-center gap-1.5">
                     <i class="fa-solid fa-database text-cyan-400"></i> phpMyAdmin
@@ -279,27 +279,73 @@
             <div id="map"></div>
         </div>
 
-        <!-- ApexCharts Visual Analytics Grid -->
+        <!-- Section Header for Analytics Dashboard -->
+        <div class="pt-4 flex items-center justify-between border-b border-slate-800 pb-3">
+            <div>
+                <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-chart-line text-cyan-400"></i> Dashboard Analisis Tracer Study & Akreditasi
+                </h2>
+                <p class="text-xs text-slate-400">Visualisasi statistik interaktif ApexCharts berdasarkan data filter yang aktif</p>
+            </div>
+            <span class="px-3 py-1 rounded-full bg-slate-800 text-slate-400 text-xs font-mono border border-slate-700">
+                5 Active Charts
+            </span>
+        </div>
+
+        <!-- ApexCharts Visual Analytics Grid 1: Top Profesi & Gauge Linearitas -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <!-- Chart 1: Bar Chart Top 10 Profesi -->
             <div class="glass-panel p-5 rounded-2xl border border-slate-800 lg:col-span-2">
                 <div class="flex items-center justify-between mb-4">
                     <h3 class="text-sm font-semibold text-white flex items-center gap-2">
-                        <i class="fa-solid fa-chart-column text-brand-400"></i> Top 10 Kategori Profesi Terbanyak
+                        <i class="fa-solid fa-chart-column text-brand-400"></i> 1. Top 10 Kategori Profesi Terbanyak
                     </h3>
-                    <span class="text-[11px] text-slate-400">Statistik Profesi</span>
+                    <span class="text-[11px] text-slate-400">Klasifikasi Profesi</span>
                 </div>
-                <div id="chart-profesi" class="min-h-[280px]"></div>
+                <div id="chart-profesi" class="min-h-[260px]"></div>
             </div>
 
             <!-- Chart 2: Gauge Linearitas Karir -->
             <div class="glass-panel p-5 rounded-2xl border border-slate-800">
                 <div class="flex items-center justify-between mb-4">
                     <h3 class="text-sm font-semibold text-white flex items-center gap-2">
-                        <i class="fa-solid fa-chart-pie text-cyan-400"></i> Linearitas Karir dengan Prodi
+                        <i class="fa-solid fa-bullseye text-amber-400"></i> 2. Tingkat Linearitas Karir
                     </h3>
                 </div>
-                <div id="chart-linearitas" class="min-h-[280px]"></div>
+                <div id="chart-linearitas" class="min-h-[260px]"></div>
+            </div>
+        </div>
+
+        <!-- ApexCharts Visual Analytics Grid 2: Jenis Pekerjaan, Rentang Gaji & Breakdown Fakultas -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Chart 3: Donut Chart Jenis Pekerjaan -->
+            <div class="glass-panel p-5 rounded-2xl border border-slate-800">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-sm font-semibold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-chart-pie text-cyan-400"></i> 3. Status Jenis Pekerjaan
+                    </h3>
+                </div>
+                <div id="chart-jenis-pekerjaan" class="min-h-[260px]"></div>
+            </div>
+
+            <!-- Chart 4: Column Chart Estimasi Gaji -->
+            <div class="glass-panel p-5 rounded-2xl border border-slate-800">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-sm font-semibold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-money-bill-wave text-emerald-400"></i> 4. Estimasi Pendapatan Bulanan
+                    </h3>
+                </div>
+                <div id="chart-gaji" class="min-h-[260px]"></div>
+            </div>
+
+            <!-- Chart 5: Stacked Column Keselarasan per Fakultas -->
+            <div class="glass-panel p-5 rounded-2xl border border-slate-800">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-sm font-semibold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-layer-group text-purple-400"></i> 5. Keselarasan per Fakultas
+                    </h3>
+                </div>
+                <div id="chart-fakultas-keselarasan" class="min-h-[260px]"></div>
             </div>
         </div>
 
@@ -371,6 +417,9 @@
         // Chart Instances
         let chartProfesiInstance = null;
         let chartLinearitasInstance = null;
+        let chartJenisPekerjaanInstance = null;
+        let chartGajiInstance = null;
+        let chartFakultasKeselarasanInstance = null;
 
         // Custom Marker Icon SVG
         const customIcon = L.divIcon({
@@ -406,7 +455,7 @@
 
                 updateStats(data.stats);
                 updateMapMarkers(data.locations);
-                updateApexCharts(data.profesi_distribution, data.keselarasan_breakdown, data.stats.linearitas_percentage);
+                updateApexCharts(data);
                 updateTable(data.locations);
             } catch (error) {
                 console.error('Error fetching map data:', error);
@@ -468,89 +517,96 @@
             }
         }
 
-        function updateApexCharts(profesiDist, keselarasanBreakdown, linearitasRate) {
+        function updateApexCharts(data) {
             // 1. Bar Chart Top 10 Profesi
-            const profesiLabels = Object.keys(profesiDist);
-            const profesiValues = Object.values(profesiDist);
+            const profesiLabels = Object.keys(data.profesi_distribution);
+            const profesiValues = Object.values(data.profesi_distribution);
 
             const optionsProfesi = {
-                series: [{
-                    name: 'Jumlah Alumni',
-                    data: profesiValues
-                }],
-                chart: {
-                    type: 'bar',
-                    height: 280,
-                    toolbar: { show: false },
-                    foreColor: '#94a3b8',
-                },
-                plotOptions: {
-                    bar: {
-                        borderRadius: 6,
-                        horizontal: true,
-                        barHeight: '55%',
-                    }
-                },
+                series: [{ name: 'Jumlah Alumni', data: profesiValues }],
+                chart: { type: 'bar', height: 260, toolbar: { show: false }, foreColor: '#94a3b8' },
+                plotOptions: { bar: { borderRadius: 6, horizontal: true, barHeight: '55%' } },
                 colors: ['#6366f1'],
                 dataLabels: { enabled: true, style: { fontSize: '10px', colors: ['#fff'] } },
                 xaxis: { categories: profesiLabels },
                 grid: { borderColor: '#334155', strokeDashArray: 3 }
             };
-
             if (chartProfesiInstance) chartProfesiInstance.destroy();
             chartProfesiInstance = new ApexCharts(document.querySelector("#chart-profesi"), optionsProfesi);
             chartProfesiInstance.render();
 
-            // 2. Donut / Radial Gauge Linearitas Karir
+            // 2. Radial Gauge Linearitas Karir
             const optionsLinearitas = {
-                series: [linearitasRate],
-                chart: {
-                    type: 'radialBar',
-                    height: 280,
-                    sparkline: { enabled: true }
-                },
+                series: [data.stats.linearitas_percentage],
+                chart: { type: 'radialBar', height: 260, sparkline: { enabled: true } },
                 plotOptions: {
                     radialBar: {
-                        startAngle: -90,
-                        endAngle: 90,
-                        track: {
-                            background: '#1e293b',
-                            strokeWidth: '97%',
-                        },
+                        startAngle: -90, endAngle: 90,
+                        track: { background: '#1e293b', strokeWidth: '97%' },
                         dataLabels: {
-                            name: {
-                                show: true,
-                                fontSize: '13px',
-                                color: '#94a3b8',
-                                offsetY: -20
-                            },
-                            value: {
-                                offsetY: -10,
-                                fontSize: '24px',
-                                fontWeight: 'bold',
-                                color: '#f59e0b',
-                                formatter: function (val) {
-                                    return val + "%";
-                                }
-                            }
+                            name: { show: true, fontSize: '13px', color: '#94a3b8', offsetY: -20 },
+                            value: { offsetY: -10, fontSize: '24px', fontWeight: 'bold', color: '#f59e0b', formatter: (val) => val + "%" }
                         }
                     }
                 },
-                fill: {
-                    type: 'gradient',
-                    gradient: {
-                        shade: 'dark',
-                        type: 'horizontal',
-                        gradientToColors: ['#10b981'],
-                        stops: [0, 100]
-                    }
-                },
+                fill: { type: 'gradient', gradient: { shade: 'dark', type: 'horizontal', gradientToColors: ['#10b981'], stops: [0, 100] } },
                 labels: ['Keselarasan Karir'],
             };
-
             if (chartLinearitasInstance) chartLinearitasInstance.destroy();
             chartLinearitasInstance = new ApexCharts(document.querySelector("#chart-linearitas"), optionsLinearitas);
             chartLinearitasInstance.render();
+
+            // 3. Donut Chart Jenis Pekerjaan
+            const jenisLabels = Object.keys(data.jenis_pekerjaan_distribution);
+            const jenisValues = Object.values(data.jenis_pekerjaan_distribution);
+            const optionsJenis = {
+                series: jenisValues,
+                chart: { type: 'donut', height: 260, foreColor: '#94a3b8' },
+                labels: jenisLabels,
+                colors: ['#10b981', '#06b6d4', '#8b5cf6', '#f59e0b', '#ef4444'],
+                legend: { position: 'bottom', fontSize: '11px' },
+                dataLabels: { enabled: true, style: { fontSize: '10px' } },
+                stroke: { colors: ['#1e293b'] }
+            };
+            if (chartJenisPekerjaanInstance) chartJenisPekerjaanInstance.destroy();
+            chartJenisPekerjaanInstance = new ApexCharts(document.querySelector("#chart-jenis-pekerjaan"), optionsJenis);
+            chartJenisPekerjaanInstance.render();
+
+            // 4. Column Chart Estimasi Gaji
+            const gajiLabels = Object.keys(data.gaji_distribution);
+            const gajiValues = Object.values(data.gaji_distribution);
+            const optionsGaji = {
+                series: [{ name: 'Jumlah Alumni', data: gajiValues }],
+                chart: { type: 'bar', height: 260, toolbar: { show: false }, foreColor: '#94a3b8' },
+                plotOptions: { bar: { borderRadius: 6, columnWidth: '45%' } },
+                colors: ['#10b981'],
+                dataLabels: { enabled: true, style: { fontSize: '10px', colors: ['#fff'] } },
+                xaxis: { categories: gajiLabels },
+                grid: { borderColor: '#334155', strokeDashArray: 3 }
+            };
+            if (chartGajiInstance) chartGajiInstance.destroy();
+            chartGajiInstance = new ApexCharts(document.querySelector("#chart-gaji"), optionsGaji);
+            chartGajiInstance.render();
+
+            // 5. Stacked Column Keselarasan per Fakultas
+            const fakCategories = data.fakultas_keselarasan.categories;
+            const fakSeries = [
+                { name: 'Selaras', data: data.fakultas_keselarasan.series.selaras },
+                { name: 'Kurang Selaras', data: data.fakultas_keselarasan.series.kurang_selaras },
+                { name: 'Tidak Selaras', data: data.fakultas_keselarasan.series.tidak_selaras },
+            ];
+            const optionsFakultasKeselarasan = {
+                series: fakSeries,
+                chart: { type: 'bar', height: 260, stacked: true, toolbar: { show: false }, foreColor: '#94a3b8' },
+                colors: ['#10b981', '#f59e0b', '#ef4444'],
+                plotOptions: { bar: { horizontal: false, borderRadius: 4, columnWidth: '40%' } },
+                xaxis: { categories: fakCategories },
+                legend: { position: 'bottom', fontSize: '11px' },
+                grid: { borderColor: '#334155', strokeDashArray: 3 }
+            };
+            if (chartFakultasKeselarasanInstance) chartFakultasKeselarasanInstance.destroy();
+            chartFakultasKeselarasanInstance = new ApexCharts(document.querySelector("#chart-fakultas-keselarasan"), optionsFakultasKeselarasan);
+            chartFakultasKeselarasanInstance.render();
         }
 
         function updateTable(locations) {
