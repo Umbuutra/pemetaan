@@ -102,6 +102,9 @@
 
                 @auth
                     <div class="flex items-center gap-2 ml-2 pl-2 border-l border-slate-800">
+                        <a href="{{ route('profil.edit') }}" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-brand-500/10 hover:bg-brand-500/20 text-brand-300 border border-brand-500/30 transition-colors flex items-center gap-1.5">
+                            <i class="fa-solid fa-user-pen text-brand-400"></i> Edit Profil
+                        </a>
                         <div class="text-right hidden sm:block">
                             <p class="text-xs font-semibold text-white">{{ Auth::user()->name }}</p>
                             <p class="text-[10px] text-brand-400 font-medium uppercase">{{ Auth::user()->role }}</p>
