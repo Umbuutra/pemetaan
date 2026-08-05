@@ -50,7 +50,7 @@
 
     <style>
         #map {
-            height: 520px;
+            height: 500px;
             width: 100%;
             border-radius: 1rem;
             z-index: 10;
@@ -86,7 +86,7 @@
                     <h1 class="text-xl font-bold tracking-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
                         Pusim Map System
                     </h1>
-                    <p class="text-xs text-slate-400">Pemetaan Sebaran Mahasiswa Berdasarkan Wilayah & Akademik</p>
+                    <p class="text-xs text-slate-400">Pemetaan Sebaran Mahasiswa & Alumni Berdasarkan Profesi (GIS)</p>
                 </div>
             </div>
 
@@ -128,48 +128,59 @@
     <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 space-y-8">
 
         <!-- Stat Counter Cards Row -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
             <!-- Card 1 -->
-            <div class="glass-panel p-5 rounded-2xl flex items-center gap-4 border border-slate-800 hover:border-brand-500/40 transition-all group">
-                <div class="w-12 h-12 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+            <div class="glass-panel p-4 rounded-2xl flex items-center gap-3.5 border border-slate-800 hover:border-brand-500/40 transition-all group">
+                <div class="w-11 h-11 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center text-lg group-hover:scale-110 transition-transform">
                     <i class="fa-solid fa-user-graduate"></i>
                 </div>
                 <div>
-                    <p class="text-xs text-slate-400 font-medium">Total Mahasiswa</p>
-                    <h3 class="text-2xl font-bold text-white mt-0.5" id="stat-mahasiswa">0</h3>
+                    <p class="text-[11px] text-slate-400 font-medium">Total Terdata</p>
+                    <h3 class="text-xl font-bold text-white mt-0.5" id="stat-mahasiswa">0</h3>
                 </div>
             </div>
 
             <!-- Card 2 -->
-            <div class="glass-panel p-5 rounded-2xl flex items-center gap-4 border border-slate-800 hover:border-cyan-500/40 transition-all group">
-                <div class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+            <div class="glass-panel p-4 rounded-2xl flex items-center gap-3.5 border border-slate-800 hover:border-cyan-500/40 transition-all group">
+                <div class="w-11 h-11 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-lg group-hover:scale-110 transition-transform">
                     <i class="fa-solid fa-building-columns"></i>
                 </div>
                 <div>
-                    <p class="text-xs text-slate-400 font-medium">Fakultas</p>
-                    <h3 class="text-2xl font-bold text-white mt-0.5" id="stat-fakultas">0</h3>
+                    <p class="text-[11px] text-slate-400 font-medium">Fakultas</p>
+                    <h3 class="text-xl font-bold text-white mt-0.5" id="stat-fakultas">0</h3>
                 </div>
             </div>
 
             <!-- Card 3 -->
-            <div class="glass-panel p-5 rounded-2xl flex items-center gap-4 border border-slate-800 hover:border-purple-500/40 transition-all group">
-                <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+            <div class="glass-panel p-4 rounded-2xl flex items-center gap-3.5 border border-slate-800 hover:border-purple-500/40 transition-all group">
+                <div class="w-11 h-11 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-lg group-hover:scale-110 transition-transform">
                     <i class="fa-solid fa-graduation-cap"></i>
                 </div>
                 <div>
-                    <p class="text-xs text-slate-400 font-medium">Program Studi</p>
-                    <h3 class="text-2xl font-bold text-white mt-0.5" id="stat-prodi">0</h3>
+                    <p class="text-[11px] text-slate-400 font-medium">Program Studi</p>
+                    <h3 class="text-xl font-bold text-white mt-0.5" id="stat-prodi">0</h3>
                 </div>
             </div>
 
             <!-- Card 4 -->
-            <div class="glass-panel p-5 rounded-2xl flex items-center gap-4 border border-slate-800 hover:border-emerald-500/40 transition-all group">
-                <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+            <div class="glass-panel p-4 rounded-2xl flex items-center gap-3.5 border border-slate-800 hover:border-emerald-500/40 transition-all group">
+                <div class="w-11 h-11 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-lg group-hover:scale-110 transition-transform">
                     <i class="fa-solid fa-map-marked-alt"></i>
                 </div>
                 <div>
-                    <p class="text-xs text-slate-400 font-medium">Provinsi Terjangkau</p>
-                    <h3 class="text-2xl font-bold text-white mt-0.5" id="stat-wilayah">0</h3>
+                    <p class="text-[11px] text-slate-400 font-medium">Provinsi Sebaran</p>
+                    <h3 class="text-xl font-bold text-white mt-0.5" id="stat-wilayah">0</h3>
+                </div>
+            </div>
+
+            <!-- Card 5 (Linearitas Rate) -->
+            <div class="glass-panel p-4 rounded-2xl flex items-center gap-3.5 border border-slate-800 hover:border-amber-500/40 transition-all group">
+                <div class="w-11 h-11 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-lg group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-bullseye"></i>
+                </div>
+                <div>
+                    <p class="text-[11px] text-slate-400 font-medium">Linearitas Karir</p>
+                    <h3 class="text-xl font-bold text-amber-400 mt-0.5" id="stat-linearitas">0%</h3>
                 </div>
             </div>
         </div>
@@ -178,18 +189,18 @@
         <div class="glass-panel p-5 rounded-2xl border border-slate-800">
             <div class="flex items-center justify-between mb-4">
                 <h3 class="text-sm font-semibold text-slate-200 flex items-center gap-2">
-                    <i class="fa-solid fa-filter text-brand-400"></i> Filter Sebaran GIS
+                    <i class="fa-solid fa-filter text-brand-400"></i> Filter Interaktif Sebaran & Profesi
                 </h3>
                 <button id="btn-reset" class="text-xs text-slate-400 hover:text-white transition-colors flex items-center gap-1">
                     <i class="fa-solid fa-rotate-left"></i> Reset Filter
                 </button>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-3">
                 <!-- Filter Fakultas -->
                 <div>
-                    <label class="block text-xs font-medium text-slate-400 mb-1.5">Fakultas</label>
-                    <select id="filter-fakultas" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-brand-500">
+                    <label class="block text-[11px] font-medium text-slate-400 mb-1">Fakultas</label>
+                    <select id="filter-fakultas" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-brand-500">
                         <option value="">Semua Fakultas</option>
                         @foreach($fakultas as $f)
                             <option value="{{ $f->id }}">{{ $f->nama_fakultas }}</option>
@@ -199,19 +210,41 @@
 
                 <!-- Filter Program Studi -->
                 <div>
-                    <label class="block text-xs font-medium text-slate-400 mb-1.5">Program Studi</label>
-                    <select id="filter-prodi" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-brand-500">
-                        <option value="">Semua Program Studi</option>
+                    <label class="block text-[11px] font-medium text-slate-400 mb-1">Program Studi</label>
+                    <select id="filter-prodi" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-brand-500">
+                        <option value="">Semua Prodi</option>
                         @foreach($programStudi as $p)
                             <option value="{{ $p->id }}">{{ $p->nama_prodi }} ({{ $p->jenjang }})</option>
                         @endforeach
                     </select>
                 </div>
 
+                <!-- Filter Kategori Profesi -->
+                <div>
+                    <label class="block text-[11px] font-medium text-slate-400 mb-1">Kategori Profesi</label>
+                    <select id="filter-kategori-profesi" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-brand-500">
+                        <option value="">Semua Kategori Profesi</option>
+                        @foreach($kategoriProfesi as $kp)
+                            <option value="{{ $kp->id }}">{{ $kp->nama_kategori }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <!-- Filter Keselarasan Karir -->
+                <div>
+                    <label class="block text-[11px] font-medium text-slate-400 mb-1">Keselarasan Karir</label>
+                    <select id="filter-keselarasan" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-brand-500">
+                        <option value="">Semua Keselarasan</option>
+                        <option value="selaras">✅ Selaras</option>
+                        <option value="kurang_selaras">⚠️ Kurang Selaras</option>
+                        <option value="tidak_selaras">❌ Tidak Selaras</option>
+                    </select>
+                </div>
+
                 <!-- Filter Angkatan -->
                 <div>
-                    <label class="block text-xs font-medium text-slate-400 mb-1.5">Angkatan</label>
-                    <select id="filter-angkatan" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-brand-500">
+                    <label class="block text-[11px] font-medium text-slate-400 mb-1">Angkatan</label>
+                    <select id="filter-angkatan" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-brand-500">
                         <option value="">Semua Angkatan</option>
                         @foreach($angkatanList as $a)
                             <option value="{{ $a }}">{{ $a }}</option>
@@ -221,8 +254,8 @@
 
                 <!-- Filter Provinsi -->
                 <div>
-                    <label class="block text-xs font-medium text-slate-400 mb-1.5">Provinsi</label>
-                    <select id="filter-provinsi" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-brand-500">
+                    <label class="block text-[11px] font-medium text-slate-400 mb-1">Provinsi</label>
+                    <select id="filter-provinsi" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-brand-500">
                         <option value="">Semua Provinsi</option>
                         @foreach($provinsi as $pr)
                             <option value="{{ $pr->id }}">{{ $pr->nama_provinsi }}</option>
@@ -237,35 +270,36 @@
             <div class="flex items-center justify-between px-2 mb-3">
                 <div class="flex items-center gap-2">
                     <span class="w-3 h-3 rounded-full bg-brand-500 animate-pulse"></span>
-                    <h3 class="text-sm font-semibold text-white">Peta GIS Sebaran Tempat Tinggal & Profesi</h3>
+                    <h3 class="text-sm font-semibold text-white">Peta GIS Sebaran Tempat Kerja & Profesi Alumni</h3>
                 </div>
-                <span class="text-xs text-slate-400" id="map-counter-info">Menampilkan 0 Lokasi</span>
+                <span class="text-xs text-slate-400" id="map-counter-info">Menampilkan 0 Titik Lokasi</span>
             </div>
 
             <!-- Map Container -->
             <div id="map"></div>
         </div>
 
-        <!-- Charts Visual Analytics Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- Chart 1: Sebaran per Fakultas -->
-            <div class="glass-panel p-5 rounded-2xl border border-slate-800">
-                <h3 class="text-sm font-semibold text-white mb-4 flex items-center gap-2">
-                    <i class="fa-solid fa-chart-pie text-cyan-400"></i> Distribusi Mahasiswa per Fakultas
-                </h3>
-                <div class="h-64 relative flex items-center justify-center">
-                    <canvas id="chart-fakultas"></canvas>
+        <!-- ApexCharts Visual Analytics Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Chart 1: Bar Chart Top 10 Profesi -->
+            <div class="glass-panel p-5 rounded-2xl border border-slate-800 lg:col-span-2">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-sm font-semibold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-chart-column text-brand-400"></i> Top 10 Kategori Profesi Terbanyak
+                    </h3>
+                    <span class="text-[11px] text-slate-400">Statistik Profesi</span>
                 </div>
+                <div id="chart-profesi" class="min-h-[280px]"></div>
             </div>
 
-            <!-- Chart 2: Top Kabupaten/Kota -->
+            <!-- Chart 2: Gauge Linearitas Karir -->
             <div class="glass-panel p-5 rounded-2xl border border-slate-800">
-                <h3 class="text-sm font-semibold text-white mb-4 flex items-center gap-2">
-                    <i class="fa-solid fa-chart-column text-emerald-400"></i> Top 5 Kota/Kabupaten Asal
-                </h3>
-                <div class="h-64 relative">
-                    <canvas id="chart-kabupaten"></canvas>
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-sm font-semibold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-chart-pie text-cyan-400"></i> Linearitas Karir dengan Prodi
+                    </h3>
                 </div>
+                <div id="chart-linearitas" class="min-h-[280px]"></div>
             </div>
         </div>
 
@@ -273,12 +307,12 @@
         <div class="glass-panel rounded-2xl border border-slate-800 overflow-hidden">
             <div class="p-5 border-b border-slate-800/80 flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
-                    <h3 class="text-base font-semibold text-white">Daftar Detail Sebaran Mahasiswa</h3>
-                    <p class="text-xs text-slate-400">Daftar mahasiswa beserta lokasi wilayah dan riwayat profesi</p>
+                    <h3 class="text-base font-semibold text-white">Daftar Detail Sebaran Mahasiswa & Profesi</h3>
+                    <p class="text-xs text-slate-400">Data mahasiswa, lokasi kerja, serta tingkat keselarasan prodi</p>
                 </div>
                 <div class="relative w-full md:w-64">
                     <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-xs text-slate-400"></i>
-                    <input type="text" id="search-table" placeholder="Cari nama, NIM, kota..." class="w-full bg-slate-900 border border-slate-700/80 rounded-xl pl-9 pr-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-brand-500">
+                    <input type="text" id="search-table" placeholder="Cari nama, NIM, profesi..." class="w-full bg-slate-900 border border-slate-700/80 rounded-xl pl-9 pr-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-brand-500">
                 </div>
             </div>
 
@@ -288,9 +322,9 @@
                         <tr>
                             <th class="px-5 py-3.5">NIM & Nama</th>
                             <th class="px-5 py-3.5">Prodi & Fakultas</th>
-                            <th class="px-5 py-3.5">Angkatan</th>
-                            <th class="px-5 py-3.5">Wilayah Domisili</th>
-                            <th class="px-5 py-3.5">Profesi / Pekerjaan</th>
+                            <th class="px-5 py-3.5">Kategori Profesi</th>
+                            <th class="px-5 py-3.5">Posisi & Perusahaan</th>
+                            <th class="px-5 py-3.5 text-center">Keselarasan</th>
                             <th class="px-5 py-3.5 text-center">Aksi</th>
                         </tr>
                     </thead>
@@ -311,9 +345,9 @@
     <!-- Leaflet.js & MarkerCluster JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
-    
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- ApexCharts JS -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
     <script>
         // Initialize Leaflet Map centered on Indonesia
@@ -321,7 +355,7 @@
             zoomControl: true,
         }).setView([-2.548926, 118.014863], 5);
 
-        // Dark Map Tile Layer (OpenStreetMap / CartoDB Dark Matter)
+        // Dark Map Tile Layer (CartoDB Dark Matter)
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
             maxZoom: 19,
             attribution: '&copy; OpenStreetMap contributors &copy; CARTO'
@@ -334,15 +368,15 @@
         });
         map.addLayer(markersCluster);
 
-        // Chart Variables
-        let chartFakultasInstance = null;
-        let chartKabupatenInstance = null;
+        // Chart Instances
+        let chartProfesiInstance = null;
+        let chartLinearitasInstance = null;
 
         // Custom Marker Icon SVG
         const customIcon = L.divIcon({
             className: 'custom-pin',
             html: `<div class="w-8 h-8 rounded-full bg-gradient-to-tr from-brand-600 to-cyan-400 border-2 border-white flex items-center justify-center text-white shadow-lg shadow-brand-500/50">
-                    <i class="fa-solid fa-user-graduate text-xs"></i>
+                    <i class="fa-solid fa-briefcase text-xs"></i>
                    </div>`,
             iconSize: [32, 32],
             iconAnchor: [16, 32],
@@ -353,12 +387,16 @@
         async function fetchMapData() {
             const fakultasId = document.getElementById('filter-fakultas').value;
             const prodiId = document.getElementById('filter-prodi').value;
+            const katProfesiId = document.getElementById('filter-kategori-profesi').value;
+            const keselarasan = document.getElementById('filter-keselarasan').value;
             const angkatan = document.getElementById('filter-angkatan').value;
             const provinsiId = document.getElementById('filter-provinsi').value;
 
             const url = new URL('/api/pemetaan/data', window.location.origin);
             if (fakultasId) url.searchParams.append('fakultas_id', fakultasId);
             if (prodiId) url.searchParams.append('program_studi_id', prodiId);
+            if (katProfesiId) url.searchParams.append('kategori_profesi_id', katProfesiId);
+            if (keselarasan) url.searchParams.append('keselarasan_prodi', keselarasan);
             if (angkatan) url.searchParams.append('angkatan', angkatan);
             if (provinsiId) url.searchParams.append('provinsi_id', provinsiId);
 
@@ -368,7 +406,7 @@
 
                 updateStats(data.stats);
                 updateMapMarkers(data.locations);
-                updateCharts(data.fakultas_distribution, data.kabupaten_distribution);
+                updateApexCharts(data.profesi_distribution, data.keselarasan_breakdown, data.stats.linearitas_percentage);
                 updateTable(data.locations);
             } catch (error) {
                 console.error('Error fetching map data:', error);
@@ -380,11 +418,12 @@
             document.getElementById('stat-fakultas').innerText = stats.total_fakultas;
             document.getElementById('stat-prodi').innerText = stats.total_prodi;
             document.getElementById('stat-wilayah').innerText = stats.total_wilayah;
+            document.getElementById('stat-linearitas').innerText = stats.linearitas_percentage + '%';
         }
 
         function updateMapMarkers(locations) {
             markersCluster.clearLayers();
-            document.getElementById('map-counter-info').innerText = `Menampilkan ${locations.length} Lokasi`;
+            document.getElementById('map-counter-info').innerText = `Menampilkan ${locations.length} Titik Lokasi`;
 
             if (locations.length === 0) return;
 
@@ -394,16 +433,26 @@
                 if (loc.lat && loc.lng) {
                     const marker = L.marker([loc.lat, loc.lng], { icon: customIcon });
 
+                    let badgeColor = 'bg-emerald-500/20 text-emerald-300';
+                    if (loc.keselarasan_prodi === 'kurang_selaras') badgeColor = 'bg-amber-500/20 text-amber-300';
+                    if (loc.keselarasan_prodi === 'tidak_selaras') badgeColor = 'bg-rose-500/20 text-rose-300';
+
                     const popupContent = `
                         <div class="space-y-2 font-sans text-xs">
                             <div class="flex items-center justify-between border-b border-slate-700 pb-1.5">
                                 <span class="font-bold text-brand-400">${loc.nama}</span>
-                                <span class="bg-brand-500/20 text-brand-300 px-2 py-0.5 rounded text-[10px] font-medium">${loc.nim}</span>
+                                <span class="bg-slate-800 text-slate-300 px-2 py-0.5 rounded text-[10px] font-medium">${loc.nim}</span>
                             </div>
                             <div class="text-slate-300 space-y-1">
                                 <p><i class="fa-solid fa-graduation-cap text-slate-400 mr-1"></i> ${loc.prodi} (${loc.fakultas})</p>
-                                <p><i class="fa-solid fa-location-dot text-rose-400 mr-1"></i> ${loc.kelurahan || ''}, ${loc.kecamatan || ''}, ${loc.kabupaten || loc.provinsi || ''}</p>
-                                <p><i class="fa-solid fa-briefcase text-emerald-400 mr-1"></i> <strong>${loc.profesi}</strong> di ${loc.perusahaan}</p>
+                                <p><i class="fa-solid fa-briefcase text-emerald-400 mr-1"></i> <strong>${loc.profesi}</strong> (${loc.kategori_profesi})</p>
+                                <p><i class="fa-solid fa-building text-cyan-400 mr-1"></i> ${loc.perusahaan}</p>
+                                <p><i class="fa-solid fa-location-dot text-rose-400 mr-1"></i> ${loc.kabupaten || loc.provinsi || 'Indonesia'}</p>
+                                <div class="pt-1">
+                                    <span class="${badgeColor} px-2 py-0.5 rounded text-[10px] font-semibold capitalize">
+                                        Keselarasan: ${loc.keselarasan_prodi.replace('_', ' ')}
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     `;
@@ -419,57 +468,89 @@
             }
         }
 
-        function updateCharts(fakultasDist, kabupatenDist) {
-            // Chart Fakultas (Doughnut)
-            const ctxFakultas = document.getElementById('chart-fakultas').getContext('2d');
-            if (chartFakultasInstance) chartFakultasInstance.destroy();
+        function updateApexCharts(profesiDist, keselarasanBreakdown, linearitasRate) {
+            // 1. Bar Chart Top 10 Profesi
+            const profesiLabels = Object.keys(profesiDist);
+            const profesiValues = Object.values(profesiDist);
 
-            chartFakultasInstance = new Chart(ctxFakultas, {
-                type: 'doughnut',
-                data: {
-                    labels: Object.keys(fakultasDist),
-                    datasets: [{
-                        data: Object.values(fakultasDist),
-                        backgroundColor: ['#6366f1', '#06b6d4', '#10b981', '#a855f7', '#f59e0b'],
-                        borderWidth: 0
-                    }]
+            const optionsProfesi = {
+                series: [{
+                    name: 'Jumlah Alumni',
+                    data: profesiValues
+                }],
+                chart: {
+                    type: 'bar',
+                    height: 280,
+                    toolbar: { show: false },
+                    foreColor: '#94a3b8',
                 },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { position: 'bottom', labels: { color: '#94a3b8', font: { family: 'Outfit', size: 11 } } }
+                plotOptions: {
+                    bar: {
+                        borderRadius: 6,
+                        horizontal: true,
+                        barHeight: '55%',
                     }
-                }
-            });
-
-            // Chart Kabupaten (Bar)
-            const ctxKabupaten = document.getElementById('chart-kabupaten').getContext('2d');
-            if (chartKabupatenInstance) chartKabupatenInstance.destroy();
-
-            chartKabupatenInstance = new Chart(ctxKabupaten, {
-                type: 'bar',
-                data: {
-                    labels: Object.keys(kabupatenDist),
-                    datasets: [{
-                        label: 'Jumlah Mahasiswa',
-                        data: Object.values(kabupatenDist),
-                        backgroundColor: '#10b981',
-                        borderRadius: 6
-                    }]
                 },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false }
-                    },
-                    scales: {
-                        x: { ticks: { color: '#94a3b8', font: { family: 'Outfit', size: 10 } }, grid: { display: false } },
-                        y: { ticks: { color: '#94a3b8', font: { family: 'Outfit', size: 10 } }, grid: { color: '#334155' } }
+                colors: ['#6366f1'],
+                dataLabels: { enabled: true, style: { fontSize: '10px', colors: ['#fff'] } },
+                xaxis: { categories: profesiLabels },
+                grid: { borderColor: '#334155', strokeDashArray: 3 }
+            };
+
+            if (chartProfesiInstance) chartProfesiInstance.destroy();
+            chartProfesiInstance = new ApexCharts(document.querySelector("#chart-profesi"), optionsProfesi);
+            chartProfesiInstance.render();
+
+            // 2. Donut / Radial Gauge Linearitas Karir
+            const optionsLinearitas = {
+                series: [linearitasRate],
+                chart: {
+                    type: 'radialBar',
+                    height: 280,
+                    sparkline: { enabled: true }
+                },
+                plotOptions: {
+                    radialBar: {
+                        startAngle: -90,
+                        endAngle: 90,
+                        track: {
+                            background: '#1e293b',
+                            strokeWidth: '97%',
+                        },
+                        dataLabels: {
+                            name: {
+                                show: true,
+                                fontSize: '13px',
+                                color: '#94a3b8',
+                                offsetY: -20
+                            },
+                            value: {
+                                offsetY: -10,
+                                fontSize: '24px',
+                                fontWeight: 'bold',
+                                color: '#f59e0b',
+                                formatter: function (val) {
+                                    return val + "%";
+                                }
+                            }
+                        }
                     }
-                }
-            });
+                },
+                fill: {
+                    type: 'gradient',
+                    gradient: {
+                        shade: 'dark',
+                        type: 'horizontal',
+                        gradientToColors: ['#10b981'],
+                        stops: [0, 100]
+                    }
+                },
+                labels: ['Keselarasan Karir'],
+            };
+
+            if (chartLinearitasInstance) chartLinearitasInstance.destroy();
+            chartLinearitasInstance = new ApexCharts(document.querySelector("#chart-linearitas"), optionsLinearitas);
+            chartLinearitasInstance.render();
         }
 
         function updateTable(locations) {
@@ -477,32 +558,45 @@
             tbody.innerHTML = '';
 
             if (locations.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" class="text-center py-6 text-slate-500">Tidak ada data mahasiswa ditemukan.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="6" class="text-center py-6 text-slate-500">Tidak ada data alumni/mahasiswa ditemukan.</td></tr>`;
                 return;
             }
 
             locations.forEach(loc => {
+                let badgeClass = 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20';
+                let badgeText = '✅ Selaras';
+                if (loc.keselarasan_prodi === 'kurang_selaras') {
+                    badgeClass = 'bg-amber-500/10 text-amber-400 border-amber-500/20';
+                    badgeText = '⚠️ Kurang';
+                } else if (loc.keselarasan_prodi === 'tidak_selaras') {
+                    badgeClass = 'bg-rose-500/10 text-rose-400 border-rose-500/20';
+                    badgeText = '❌ Tidak Selaras';
+                }
+
                 const tr = document.createElement('tr');
                 tr.className = 'hover:bg-slate-800/40 transition-colors';
                 tr.innerHTML = `
                     <td class="px-5 py-3.5">
                         <div class="font-semibold text-slate-100">${loc.nama}</div>
-                        <div class="text-[11px] text-slate-400">${loc.nim}</div>
+                        <div class="text-[11px] text-slate-400">${loc.nim} (Angkatan ${loc.angkatan})</div>
                     </td>
                     <td class="px-5 py-3.5">
                         <div class="text-slate-200">${loc.prodi}</div>
                         <div class="text-[11px] text-slate-400">${loc.fakultas}</div>
                     </td>
-                    <td class="px-5 py-3.5 font-medium text-slate-300">${loc.angkatan}</td>
                     <td class="px-5 py-3.5">
-                        <div class="text-slate-200">${loc.kelurahan || ''}, ${loc.kecamatan || ''}</div>
-                        <div class="text-[11px] text-brand-400">${loc.kabupaten || loc.provinsi || ''}</div>
+                        <span class="px-2 py-1 rounded bg-slate-800 text-slate-300 text-[11px] font-medium border border-slate-700">
+                            ${loc.kategori_profesi}
+                        </span>
                     </td>
                     <td class="px-5 py-3.5">
-                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                            <i class="fa-solid fa-briefcase text-[10px]"></i> ${loc.profesi}
+                        <div class="font-medium text-emerald-400">${loc.profesi}</div>
+                        <div class="text-[11px] text-slate-400">${loc.perusahaan}</div>
+                    </td>
+                    <td class="px-5 py-3.5 text-center">
+                        <span class="inline-flex items-center px-2.5 py-1 rounded-md text-[10px] font-medium border ${badgeClass}">
+                            ${badgeText}
                         </span>
-                        <div class="text-[10px] text-slate-400 mt-0.5">${loc.perusahaan}</div>
                     </td>
                     <td class="px-5 py-3.5 text-center">
                         <button onclick="zoomToMarker(${loc.lat}, ${loc.lng}, '${loc.nama}')" class="px-2.5 py-1 rounded-lg bg-brand-500/20 text-brand-300 hover:bg-brand-500 hover:text-white transition-all text-xs flex items-center gap-1 mx-auto">
@@ -531,13 +625,15 @@
         });
 
         // Event Listeners for Filters
-        ['filter-fakultas', 'filter-prodi', 'filter-angkatan', 'filter-provinsi'].forEach(id => {
+        ['filter-fakultas', 'filter-prodi', 'filter-kategori-profesi', 'filter-keselarasan', 'filter-angkatan', 'filter-provinsi'].forEach(id => {
             document.getElementById(id).addEventListener('change', fetchMapData);
         });
 
         document.getElementById('btn-reset').addEventListener('click', function() {
             document.getElementById('filter-fakultas').value = '';
             document.getElementById('filter-prodi').value = '';
+            document.getElementById('filter-kategori-profesi').value = '';
+            document.getElementById('filter-keselarasan').value = '';
             document.getElementById('filter-angkatan').value = '';
             document.getElementById('filter-provinsi').value = '';
             fetchMapData();
