@@ -93,7 +93,29 @@
                         @endforeach
                     </ul>
                 </div>
+            @if(session('error'))
+                <div class="mb-5 p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs flex items-center gap-2.5">
+                    <i class="fa-solid fa-circle-exclamation text-sm"></i>
+                    <span>{{ session('error') }}</span>
+                </div>
             @endif
+
+            <!-- Google OAuth SSO Button -->
+            <a href="{{ route('auth.google') }}" class="w-full mb-5 py-3 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-100 font-semibold text-xs border border-slate-700/80 hover:border-brand-500/50 shadow-lg shadow-black/40 transition-all duration-200 flex items-center justify-center gap-3 group">
+                <svg class="w-4 h-4 transition-transform group-hover:scale-110" viewBox="0 0 24 24">
+                    <path fill="#EA4335" d="M12 5c1.6 0 3 .6 4.1 1.6l3.1-3.1C17.3 1.7 14.8 1 12 1 7.5 1 3.7 3.6 1.9 7.3l3.7 2.9C6.5 7.3 9 5 12 5z"/>
+                    <path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5c-.3 1.5-1.1 2.8-2.4 3.7l3.7 2.9c2.2-2 3.7-5 3.7-8.8z"/>
+                    <path fill="#FBBC05" d="M5.6 14.8c-.2-.7-.4-1.5-.4-2.3s.2-1.6.4-2.3L1.9 7.3C.7 9.7 0 10.8 0 12.5s.7 2.8 1.9 5.2l3.7-2.9z"/>
+                    <path fill="#34A853" d="M12 23c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3 0-5.5-2.3-6.4-5.2L1.9 16C3.7 19.7 7.5 23 12 23z"/>
+                </svg>
+                <span>Masuk Menggunakan Google</span>
+            </a>
+
+            <!-- Divider OR -->
+            <div class="relative flex items-center justify-center mb-5">
+                <div class="border-t border-slate-800 w-full"></div>
+                <span class="bg-slate-900 px-3 text-[10px] text-slate-400 uppercase tracking-wider font-semibold rounded-full border border-slate-800 absolute">atau via email</span>
+            </div>
 
             <form action="{{ route('login.post') }}" method="POST" class="space-y-5">
                 @csrf
