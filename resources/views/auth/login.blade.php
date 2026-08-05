@@ -93,6 +93,8 @@
                         @endforeach
                     </ul>
                 </div>
+            @endif
+
             @if(session('error'))
                 <div class="mb-5 p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs flex items-center gap-2.5">
                     <i class="fa-solid fa-circle-exclamation text-sm"></i>
